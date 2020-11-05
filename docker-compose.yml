@@ -1,0 +1,98 @@
+version: "3.7"
+
+services:
+  web:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./app/:/var/www/myapp
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
+      - mariadb
+    networks:
+      lnmp:
+        ipv4_address: 172.12.20.5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: digitalocean.com/php7
+    command: 'php artisan serve'
+    container_name: laravel
+    restart: unless-stopped
+    ports: 
+      - 3000:8000
+    tty: true
+    volumes:
+      - ./app:/var/www/myapp
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/myapp
+    networks:
+      lnmp:
+        ipv4_address: 172.12.20.4
+  
+  mariadb:
+    image: mariadb:10.4
+    container_name: mariadb
+    restart: unless-stopped
+    command: "mysqld --init-file /data/application/init.sql"
+    env_file: .env
+    ports:
+      - 3306:3306
+    volumes:
+      # - ./mariadb:/var/lib/mysql
+      - ./config/db/init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      lnmp:
+        ipv4_address: 172.12.20.2
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyamdin
+    ports:
+      - 8000:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=172.12.20.2
+      - PMA_PORT=3306
+    depends_on:
+      - mariadb
+    networks:
+      lnmp:
+        ipv4_address: 172.12.20.3
+    
+  # php:
+  #   image: php:7.2-fpm
+  #   volumes:
+  #     - ./src:/var/www/myapp
+  #     - ./config/php/php.ini:/usr/local/etc/php/php.ini
+  #   command: "/bin/sh -c 'docker-php-ext-install mysqli'"
+  #   depends_on:
+  #     - mariadb
+  #   networks:
+  #     lnmp:
+  #       ipv4_address: 172.12.20.4
+
+volumes:
+  mariadb-data:
+
+networks:
+  lnmp:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.12.20.0/24
