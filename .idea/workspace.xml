@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5354edc2-28f6-4189-bc4f-e0df67b8375b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/nginx/site.conf" beforeDir="false" afterPath="$PROJECT_DIR$/config/nginx/site.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/plugins/db/queries.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugins/db/queries.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +35,9 @@
       <workItem from="1603161557110" duration="466000" />
       <workItem from="1603162049498" duration="3756000" />
       <workItem from="1603202826208" duration="48000" />
+      <workItem from="1605194164263" duration="204000" />
+      <workItem from="1605243421639" duration="253000" />
+      <workItem from="1605885436321" duration="8000" />
     </task>
     <servers />
   </component>
