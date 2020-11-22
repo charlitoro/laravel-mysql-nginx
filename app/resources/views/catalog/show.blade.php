@@ -3,7 +3,7 @@
 @section('content')
      <div class="row"> 
           <div class="col-sm-4">
-               <img src="{{ $movie['poster'] }}"/>
+               <img src="{{ $movie['poster'] }}" style="height:280px"/>
           </div>
           <div class="col-sm-8">
                <h3>{{$movie['title']}}</h3>
