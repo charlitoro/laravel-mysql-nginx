@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CatalogController;
 
 Route::get('/', [HomeController::class, 'getHome']);
-Route::get( 'catalog', [CatalogController::class, 'getIndex'] );
-Route::get( 'catalog/show/{id}', [CatalogController::class, 'getShow'] );
-Route::get( 'catalog/create', [CatalogController::class, 'getCreate']);
-Route::get( 'catalog/edit/{id}', [CatalogController::class, 'getEdit'] );
+Route::get( 'catalog', [CatalogController::class, 'getIndex'] )->middleware('auth');
+Route::get( 'catalog/show/{id}', [CatalogController::class, 'getShow'] )->middleware('auth');
+Route::get( 'catalog/create', [CatalogController::class, 'getCreate'])->middleware('auth');
+Route::get( 'catalog/edit/{id}', [CatalogController::class, 'getEdit'] )->middleware('auth');
 
-Route::get( 'login', function(){ return view( 'auth.login' ); } );
-Route::get( 'logout', function(){ return 'Logout usuario'; } );
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post( 'catalog/create', [CatalogController::class, 'postCreate'] )->middleware('auth');
+Route::put( 'catalog/edit/{id}', [CatalogController::class, 'putEdit'] )->middleware('auth');
