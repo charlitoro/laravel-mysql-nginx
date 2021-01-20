@@ -7,7 +7,7 @@
                     Modificar película
                </div>
                <div class="card-body" style="padding:30px">
-                    <form method="POST">
+                    <form method="PUT">
                          {{method_field('PUT')}}
                          {{ csrf_field() }}
                          <div class="form-group">

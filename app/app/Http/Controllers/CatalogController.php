@@ -21,7 +21,7 @@ class CatalogController extends Controller
     }
 
     public function getEdit( $id ){
-        return view( 'catalog.edit', array( 'id' => Movie::findOrFail($id) ) );
+        return view( 'catalog.edit', array( 'pelicula' => Movie::findOrFail($id) ) );
     }
 
     public function postCreate( Request $request ){
@@ -30,10 +30,10 @@ class CatalogController extends Controller
         $movie->year = $request->input('year');
         $movie->director = $request->input('director');
         $movie->poster = $request->input('poster');
-        $movie->synapsis = $request->input('synapsis');
+        $movie->synopsis = $request->input('synopsis');
         $movie->save();
 
-        return view('/catalog');
+        return view( 'catalog.index', array('arrayPeliculas' => Movie::all()) );
     }
 
     public function putEdit( Request $request, $id ){
@@ -42,10 +42,10 @@ class CatalogController extends Controller
         $movie->year = $request->input('year');
         $movie->director = $request->input('director');
         $movie->poster = $request->input('poster');
-        $movie->synapsis = $request->input('synapsis');
+        $movie->synopsis = $request->input('synopsis');
         $movie->save();
 
-        return view('/catalog/show/'.$id);
+        return view( 'catalog.show', array('movie' => Movie::findOrFail($id)) );
     }
 
 
