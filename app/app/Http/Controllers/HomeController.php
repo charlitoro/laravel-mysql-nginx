@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Movie;
 
 class HomeController extends Controller
 {
@@ -28,6 +29,6 @@ class HomeController extends Controller
         if( $user == null ){
             return view('auth.login');
         }
-        return view('home');
+        return view( 'catalog.index', array('arrayPeliculas' => Movie::all()) );
     }
 }

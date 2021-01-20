@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CatalogController;
 
-Route::get('/', [HomeController::class, 'getHome']);
+Route::get('/', [HomeController::class, 'index']);
 Route::get( 'catalog', [CatalogController::class, 'getIndex'] )->middleware('auth');
 Route::get( 'catalog/show/{id}', [CatalogController::class, 'getShow'] )->middleware('auth');
 Route::get( 'catalog/create', [CatalogController::class, 'getCreate'])->middleware('auth');
