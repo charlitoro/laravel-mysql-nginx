@@ -27,8 +27,8 @@ class HomeController extends Controller
     {
         $user = Auth::User();
         if( $user == null ){
-            return view('auth.login');
+            return redirect('/auth/login' );
         }
-        return view( 'catalog.index', array('arrayPeliculas' => Movie::all()) );
+        return redirect( '/catalog' );
     }
 }

@@ -33,7 +33,7 @@ class CatalogController extends Controller
         $movie->synopsis = $request->input('synopsis');
         $movie->save();
 
-        return view( 'catalog.index', array('arrayPeliculas' => Movie::all()) );
+        return redirect( '/catalog' );
     }
 
     public function putEdit( Request $request, $id ){
@@ -45,7 +45,7 @@ class CatalogController extends Controller
         $movie->synopsis = $request->input('synopsis');
         $movie->save();
 
-        return view( 'catalog.show', array('movie' => Movie::findOrFail($id)) );
+        return redirect( '/catalog/show/'.$id );
     }
 
 
